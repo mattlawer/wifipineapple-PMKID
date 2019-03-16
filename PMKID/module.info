@@ -1,0 +1,10 @@
+{
+    "author": "mattlawer & adde88",
+    "description": "PMKID attack",
+    "devices": [
+        "nano",
+        "tetra"
+    ],
+    "title": "PMKID",
+    "version": "1.0"
+}
