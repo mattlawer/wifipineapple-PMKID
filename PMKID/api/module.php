@@ -247,7 +247,8 @@ class PMKID extends Module
         $logPath="/pineapple/modules/PMKID/log/".$this->request->file;
         $log_date = gmdate("F d Y H:i:s", $this->request->file);
 
-        //exec("hcxpcaptool -z ".$logPath."/hcxdump.16800 ".$logPath."/hcxdump.pcapng > ".$logPath."/PMKID.log");
+        exec("hcxpcaptool -z ".$logPath."/hcxdump.16800 ".$logPath."/hcxdump.pcapng > ".$logPath."/PMKID.log");
+        exec("cat ".$logPath."/PMKID.log", $output);
         
         if (!empty($output)) {
             $this->response = array("output" => implode("\n", $output), "date" => $log_date);

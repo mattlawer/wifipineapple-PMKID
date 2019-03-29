@@ -297,7 +297,6 @@ registerController('PMKID_OutputController', ['$api', '$scope', '$rootScope', '$
 	});
 
 	$scope.refreshOutput();
-	$scope.toggleAutoRefresh();
 
 	$rootScope.$watch('status.refreshOutput', function (param) {
 		if (param) {

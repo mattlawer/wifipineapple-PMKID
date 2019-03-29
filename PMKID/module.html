@@ -145,7 +145,7 @@
 
 <div class="panel panel-default" ng-show="$root.status.installed" ng-controller="PMKID_OutputController">
 	<div class="panel-heading">
-		<h4 class="panel-title pull-left">Owned <span class="badge">{{owned.length}}</span></h4>
+		<h4 class="panel-title pull-left">Output <span class="badge">{{owned.length}}</span></h4>
 		<div class="pull-right">
 			Auto-refresh <div class="btn-group">
 				<button ng-click="toggleAutoRefresh()" class="btn btn-xs btn-{{refreshLabelON}}">ON</button>
@@ -206,21 +206,23 @@
 			<div class="well" ng-show="(captures.length === 0)">No captures...</div>
 		</div>
 	</div>
-</div>
 
-<div class="modal fade" id="historyModal" tabindex="-1" role="dialog" aria-labelledby="historyModalLabel">
-	<div class="modal-dialog modal-lg" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="historyModalLabel">Last Modification - {{historyDate}}</h4>
-			</div>
-			<div class="modal-body">
-				<pre class="scrollable-pre log-pre">{{historyOutput}}</pre>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	<div class="modal fade" id="historyModal" tabindex="-1" role="dialog" aria-labelledby="historyModalLabel">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="historyModalLabel">Captured On - {{historyDate}}</h4>
+				</div>
+				<div class="modal-body">
+					<pre class="scrollable-pre log-pre">{{historyOutput}}</pre>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
 			</div>
 		</div>
 	</div>
 </div>
+
+
