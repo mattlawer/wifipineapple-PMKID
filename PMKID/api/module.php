@@ -70,7 +70,7 @@ class PMKID extends Module
     
     private function refreshStatus() {
         if (!file_exists('/tmp/PMKID.progress')) {
-            if (!$this->checkDependency("hcxdumptool") || !$this->checkDependency("hcxpcaptool")) {
+            if (!$this->checkDeps("hcxdumptool") || !$this->checkDeps("hcxpcaptool")) {
                 $installed = false;
                 $install = "Not installed";
                 $installLabel = "danger";
@@ -143,7 +143,7 @@ class PMKID extends Module
     }
     
     private function handleDependencies() {
-        if (!$this->checkDependency("hcxdumptool") || !$this->checkDependency("hcxpcaptool")) {
+        if (!$this->checkDeps("hcxdumptool") || !$this->checkDeps("hcxpcaptool")) {
             $this->execBackground("/pineapple/modules/PMKID/scripts/dependencies.sh install ".$this->request->destination);
             $this->response = array('success' => true);
         } else {
