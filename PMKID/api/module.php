@@ -153,14 +153,14 @@ class PMKID extends Module
     }
     
     private function getInterfaces() {
-        exec("iwconfig 2> /dev/null | grep \"wlan*\" | grep -v \"mon*\" | awk '{print $1}'", $interfaceArray);
+        exec("cat /proc/net/dev | tail -n +3 | cut -f1 -d: | sed 's/ //g' | grep -v \"mon\" | grep \"wlan\"", $interfaceArray);
         $this->response = array("interfaces" => $interfaceArray);
     }
 
     private function getMonitors() {
-        exec("iwconfig 2> /dev/null | grep \"mon*\" | awk '{print $1}'", $interfaceArray);
+        exec("cat /proc/net/dev | tail -n +3 | cut -f1 -d: | sed 's/ //g' | grep \"mon\"", $interfaceArray);
         $this->response = array(
-        	"monitors" => $interfaceArray,
+            "monitors" => $interfaceArray,
         	"selected" => reset(preg_grep('/^'.$this->uciGet("PMKID.run.interface").'/', $interfaceArray))
         );
     }
@@ -268,8 +268,8 @@ class PMKID extends Module
 
 	/* Protected */
     
-    protected function checkDependency($dependencyName) {
-        return ((exec("which {$dependencyName}") == '' ? false : true) && ($this->uciGet("PMKID.module.installed")));
+    protected function checkDeps($dependencyName) {
+        return ($this->checkDependency($dependencyName) && $this->uciGet("PMKID.module.installed"));
     }
 
     protected function getDevice() {
