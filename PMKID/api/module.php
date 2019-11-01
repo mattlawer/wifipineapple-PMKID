@@ -1,8 +1,5 @@
 <?php namespace pineapple;
 
-putenv('LD_LIBRARY_PATH='.getenv('LD_LIBRARY_PATH').':/sd/lib:/sd/usr/lib');
-putenv('PATH='.getenv('PATH').':/sd/usr/bin:/sd/usr/sbin');
-
 class PMKID extends Module
 {
     public function route()
@@ -153,12 +150,12 @@ class PMKID extends Module
     }
     
     private function getInterfaces() {
-        exec("cat /proc/net/dev | tail -n +3 | cut -f1 -d: | sed 's/ //g' | grep -v \"mon\" | grep \"wlan\"", $interfaceArray);
+        exec("iwconfig 2> /dev/null | grep \"wlan*\" | grep -v \"mon*\" | awk '{print $1}'", $interfaceArray);
         $this->response = array("interfaces" => $interfaceArray);
     }
 
     private function getMonitors() {
-        exec("cat /proc/net/dev | tail -n +3 | cut -f1 -d: | sed 's/ //g' | grep \"mon\"", $interfaceArray);
+        exec("iwconfig 2> /dev/null | grep \"mon*\" | awk '{print $1}'", $monitorArray);
         $this->response = array(
             "monitors" => $interfaceArray,
         	"selected" => reset(preg_grep('/^'.$this->uciGet("PMKID.run.interface").'/', $interfaceArray))
@@ -269,7 +266,7 @@ class PMKID extends Module
 	/* Protected */
     
     protected function checkDeps($dependencyName) {
-        return ($this->checkDependency($dependencyName) && $this->uciGet("PMKID.module.installed"));
+        return ($this->checkDependency($dependencyName) && ($this->uciGet("PMKID.module.installed")));
     }
 
     protected function getDevice() {

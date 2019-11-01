@@ -16,7 +16,7 @@ PMKID module for the WiFi Pineapple using hcxdumptool and hcxtools from [https:/
 ![SSH](https://raw.githubusercontent.com/mattlawer/wifipineapple-PMKID/master/screenshots/ssh.png)
 
         # Change owner of the module
-        chown -R 100:118 /pineapple/modules/PMKID/
+        chown -R root:root /pineapple/modules/PMKID/
 
         # Add execute permission to the scripts
         chmod +x /pineapple/modules/PMKID/scripts/*
