@@ -157,8 +157,8 @@ class PMKID extends Module
     private function getMonitors() {
         exec("iwconfig 2> /dev/null | grep \"mon*\" | awk '{print $1}'", $monitorArray);
         $this->response = array(
-            "monitors" => $interfaceArray,
-        	"selected" => reset(preg_grep('/^'.$this->uciGet("PMKID.run.interface").'/', $interfaceArray))
+            "monitors" => $monitorArray,
+        	"selected" => reset(preg_grep('/^'.$this->uciGet("PMKID.run.interface").'/', $monitorArray))
         );
     }
 
