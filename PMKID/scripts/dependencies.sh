@@ -12,14 +12,14 @@ touch /tmp/PMKID.progress
 
 if [ "$1" = "install" ]; then
   # Let's always get the latest version
-  HCXDUMPTOOL="hcxdumptool-custom_5.2.2-2_mips_24kc.ipk"
-  HCXTOOLS="hcxtools-custom_5.2.2-2_mips_24kc.ipk"
+  HCXDUMPTOOL="6.1.5/hcxdumptool-custom_6.1.5-3_mips_24kc.ipk"
+  HCXTOOLS="6.1.5/hcxtools-custom_6.1.5-3_mips_24kc.ipk"
 
   # Download latest IPK's to temp directory, and then update OPKG repositories.
   cd /tmp
   opkg update
-  wget "https://raw.githubusercontent.com/adde88/hcxtools-hcxdumptool-openwrt/openwrt-19.07/bin/packages/mips_24kc/custom/"$HCXTOOLS""
-  wget "https://raw.githubusercontent.com/adde88/hcxtools-hcxdumptool-openwrt/openwrt-19.07/bin/packages/mips_24kc/custom/"$HCXDUMPTOOL""
+  wget "https://github.com/adde88/hcxtools-hcxdumptool-openwrt/releases/download/"$HCXTOOLS""
+  wget "https://github.com/adde88/hcxtools-hcxdumptool-openwrt/releases/download/"$HCXDUMPTOOL""
 
   if [ "$2" = "internal" ]; then
     # Tetra install / general install.
