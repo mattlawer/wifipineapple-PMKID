@@ -200,7 +200,7 @@ class PMKID extends Module
     private function refreshOutput() {
         $logPath="/pineapple/modules/PMKID/log/".$this->uciGet("PMKID.run.log");
         if ($this->checkRunning("hcxdumptool") && file_exists($logPath)) {
-            exec("hcxpcapngtool -z ".$logPath."/hcxdump.16800 ".$logPath."/hcxdump.pcapng > ".$logPath."/PMKID.log");
+            exec("hcxpcapngtool -o ".$logPath."/hcxdump.22000 ".$logPath."/hcxdump.pcapng > ".$logPath."/PMKID.log");
 
             exec("cat ".$logPath."/PMKID.log", $output);
 
@@ -226,11 +226,11 @@ class PMKID extends Module
                 $entryDate = gmdate('Y-m-d H-i-s', $entryName);
 
                 $entryPcapngSize = $this->human_filesize(filesize($log_list[$i]."/hcxdump.pcapng"));
-                $entry16800Size = $this->human_filesize(filesize($log_list[$i]."/hcxdump.16800"));
+                $entry22000Size = $this->human_filesize(filesize($log_list[$i]."/hcxdump.22000"));
                 
                 $disableDelete = $i == 0 && $this->checkRunning("hcxdumptool");
 
-                echo json_encode(array($entryName, $entryDate, $entryPcapngSize, $entry16800Size, $disableDelete));
+                echo json_encode(array($entryName, $entryDate, $entryPcapngSize, $entry22000Size, $disableDelete));
 
                 if ($i!=count($log_list)-1) {
                     echo ',';
@@ -244,7 +244,7 @@ class PMKID extends Module
         $logPath="/pineapple/modules/PMKID/log/".$this->request->file;
         $log_date = gmdate("F d Y H:i:s", $this->request->file);
 
-        exec("hcxpcapngtool -z ".$logPath."/hcxdump.16800 ".$logPath."/hcxdump.pcapng > ".$logPath."/PMKID.log");
+        exec("hcxpcapngtool -o ".$logPath."/hcxdump.22000 ".$logPath."/hcxdump.pcapng > ".$logPath."/PMKID.log");
         exec("cat ".$logPath."/PMKID.log", $output);
         
         if (!empty($output)) {
