@@ -67,7 +67,7 @@ class PMKID extends Module
     
     private function refreshStatus() {
         if (!file_exists('/tmp/PMKID.progress')) {
-            if (!$this->checkDeps("hcxdumptool") || !$this->checkDeps("hcxpcaptool")) {
+            if (!$this->checkDeps("hcxdumptool") || !$this->checkDeps("hcxpcapngtool")) {
                 $installed = false;
                 $install = "Not installed";
                 $installLabel = "danger";
@@ -140,7 +140,7 @@ class PMKID extends Module
     }
     
     private function handleDependencies() {
-        if (!$this->checkDeps("hcxdumptool") || !$this->checkDeps("hcxpcaptool")) {
+        if (!$this->checkDeps("hcxdumptool") || !$this->checkDeps("hcxpcapngtool")) {
             $this->execBackground("/pineapple/modules/PMKID/scripts/dependencies.sh install ".$this->request->destination);
             $this->response = array('success' => true);
         } else {
@@ -200,7 +200,7 @@ class PMKID extends Module
     private function refreshOutput() {
         $logPath="/pineapple/modules/PMKID/log/".$this->uciGet("PMKID.run.log");
         if ($this->checkRunning("hcxdumptool") && file_exists($logPath)) {
-            exec("hcxpcaptool -z ".$logPath."/hcxdump.16800 ".$logPath."/hcxdump.pcapng > ".$logPath."/PMKID.log");
+            exec("hcxpcapngtool -z ".$logPath."/hcxdump.16800 ".$logPath."/hcxdump.pcapng > ".$logPath."/PMKID.log");
 
             exec("cat ".$logPath."/PMKID.log", $output);
 
@@ -244,7 +244,7 @@ class PMKID extends Module
         $logPath="/pineapple/modules/PMKID/log/".$this->request->file;
         $log_date = gmdate("F d Y H:i:s", $this->request->file);
 
-        exec("hcxpcaptool -z ".$logPath."/hcxdump.16800 ".$logPath."/hcxdump.pcapng > ".$logPath."/PMKID.log");
+        exec("hcxpcapngtool -z ".$logPath."/hcxdump.16800 ".$logPath."/hcxdump.pcapng > ".$logPath."/PMKID.log");
         exec("cat ".$logPath."/PMKID.log", $output);
         
         if (!empty($output)) {
