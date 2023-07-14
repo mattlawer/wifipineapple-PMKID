@@ -48,5 +48,5 @@ elif [ "$1" = "stop" ]; then
 		echo -e " - stopping -" >> ${LOG}
 	fi
   killall -2 hcxdumptool
-  hcxpcaptool -z ${RUNFOLDER}/hcxdump.16800 ${RUNFOLDER}/hcxdump.pcapng
+  hcxpcapngtool -z ${RUNFOLDER}/hcxdump.16800 ${RUNFOLDER}/hcxdump.pcapng
 fi
